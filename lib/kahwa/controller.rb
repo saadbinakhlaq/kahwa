@@ -27,7 +27,15 @@ module Kahwa
     def render_template(view_name, locals = {})
       filename = File.join('app', 'views', controller_name, "#{view_name}.erb")
       template = File.read(filename)
-      Erubis::Eruby.new(template).result(locals)
+
+      # { name: 'Saad' }
+      vars = {}
+      instance_variables.each do |var|
+        key = var.to_s.gsub('@', '').to_sym
+        vars[key] = instance_variable_get(var)
+      end
+
+      Erubis::Eruby.new(template).result(locals.merge(vars))
     end
 
     def controller_name

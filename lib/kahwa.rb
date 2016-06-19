@@ -14,16 +14,17 @@ module Kahwa
         return [404, {}, []]
       end
 
-      contoller_class, action = get_controller_and_action env
+      controller_class, action = get_controller_and_action env
 
       controller = controller_class.new(env)
 
-      response = contoller.new(env).send(action)
+      response = controller.send(action)
 
       if controller.get_response
         controller.get_response
       else
-        [200, { 'Content-type' => 'text/html' }, [response]]
+        controller.render(action)
+        controller.get_response
       end
     end
 
