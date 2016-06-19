@@ -16,8 +16,15 @@ module Kahwa
 
       contoller_class, action = get_controller_and_action env
 
-      response = contoller_class.new(env).send(action)
-      [200, { 'Content-type' => 'text/html' }, [response]]
+      controller = controller_class.new(env)
+
+      response = contoller.new(env).send(action)
+
+      if controller.get_response
+        controller.get_response
+      else
+        [200, { 'Content-type' => 'text/html' }, [response]]
+      end
     end
 
     def get_controller_and_action(env)
