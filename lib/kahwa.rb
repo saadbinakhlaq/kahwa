@@ -1,6 +1,7 @@
 require 'kahwa/version'
 require 'kahwa/controller'
 require 'kahwa/utils'
+require 'kahwa/dependencies'
 
 module Kahwa
   class Application
