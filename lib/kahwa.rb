@@ -19,13 +19,6 @@ module Kahwa
       controller = controller_class.new(env)
 
       response = controller.send(action)
-
-      if controller.get_response
-        controller.get_response
-      else
-        controller.render(action)
-        controller.get_response
-      end
     end
 
     def get_controller_and_action(env)
